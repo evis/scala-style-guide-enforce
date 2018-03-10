@@ -108,11 +108,11 @@
   <!-- TODO (partially supported) if - Omit braces if you have an else clause.
        Otherwise, surround the contents with curly braces even if the contents are only a single line. -->
   <check enabled="true" class="org.scalastyle.scalariform.IfBraceChecker" level="warning"/>
-  <!-- TODO while - Never omit braces (while cannot be used in a pure-functional manner). -->
+  <!-- TODO (PR created) while - Never omit braces (while cannot be used in a pure-functional manner). -->
   <!-- TODO (partially supported) for - Omit braces if you have a yield clause.
        Otherwise, surround the contents with curly-braces, even if the contents are only a single line. -->
   <check enabled="true" class="org.scalastyle.scalariform.ForBraceChecker" level="warning"/>
-  <!-- TODO case - Always omit braces in case clauses. -->
+  <!-- TODO (PR created) case - Always omit braces in case clauses. -->
   <!-- TODO Comprehensions with only a single generator (e.g. for (i <- 0 to 10) yield i)
        should use parentheses rather than curly braces.
        The exceptions to this rule are for-comprehensions which lack a yield clause.
