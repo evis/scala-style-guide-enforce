@@ -46,23 +46,43 @@
        Note: This convention applied even when using type aliases on annotations. -->
   <!-- All public methods should have explicit type annotations. -->
   <check enabled="true" class="org.scalastyle.scalariform.PublicMethodsHaveTypeChecker" level="warning"/>
+  <!-- Next rules apply to several space-related checkers! -->
   <!-- Type annotations and ascriptions should be patterned according to the following template: value: Type -->
-  <check customId="no.space.before.colon"
-         enabled="true"
-         class="org.scalastyle.scalariform.DisallowSpaceBeforeTokenChecker"
-         level="warning">
+  <!-- Generally speaking, method invocation in Scala follows Java conventions.
+       In other words, there should not be a space between the invocation target and the dot (.),
+       nor a space between the dot and the method name,
+       nor should there be any space between the method name and the argument-delimiters (parentheses).
+       Each argument should be separated by a single space following the comma (,):
+       Named parameters in a method invocation should be treated
+       as regular parameters (spaced accordingly following the comma)
+       with a space on either side of the equals sign. -->
+  <!-- Curly braces should be separated from the code within them by a one-space gap,
+       to give the visually busy braces “breathing room”. -->
+  <check enabled="true" class="org.scalastyle.scalariform.DisallowSpaceBeforeTokenChecker" level="warning">
     <parameters>
       <parameter name="tokens">
-        COLON
+        COLON, DOT, LPAREN, RPAREN, COMMA
       </parameter>
     </parameters>
   </check>
-  <check customId="no.space.after.colon"
-         enabled="true"
-         class="org.scalastyle.scalariform.EnsureSingleSpaceAfterTokenChecker"
-         level="warning">
+  <check enabled="true" class="org.scalastyle.scalariform.EnsureSingleSpaceAfterTokenChecker" level="warning">
     <parameters>
-      <parameter name="tokens">COLON</parameter>
+      <parameter name="tokens">
+        COLON, COMMA, EQUALS,
+        <!-- All control structures should be written with a space following the defining keyword -->
+        IF, FOR, WHILE,
+        LBRACE, RBRACE
+      </parameter>
+    </parameters>
+  </check>
+  <check enabled="true" class="org.scalastyle.scalariform.DisallowSpaceAfterTokenChecker" level="warning">
+    <parameters>
+      <parameter name="tokens">DOT, LPAREN, RPAREN</parameter>
+    </parameters>
+  </check>
+  <check enabled="true" class="org.scalastyle.scalariform.EnsureSingleSpaceBeforeTokenChecker" level="warning">
+    <parameters>
+      <parameter name="tokens">EQUALS, LBRACE, RBRACE</parameter>
     </parameters>
   </check>
   <!-- TODO Function types should be declared with a space between the parameter type, the arrow and the return type -->
@@ -94,15 +114,6 @@
        Also, because of the nature of sealed superclasses (and traits),
        all subtypes must be included in the same file. -->
   <!-- TODO All multi-unit files should be given camelCase names with a lower-case first letter. -->
-  <!-- All control structures should be written with a space following the defining keyword -->
-  <check customId="ensure.space.after.controls"
-         enabled="true"
-         class="org.scalastyle.scalariform.EnsureSingleSpaceAfterTokenChecker"
-         level="warning">
-    <parameters>
-      <parameter name="tokens">IF, FOR, WHILE</parameter>
-    </parameters>
-  </check>
   <!-- TODO Omit braces if you have an else clause.
        Otherwise, surround the contents with curly braces even if the contents are only a single line. -->
   <!-- TODO (partially supported) if - Omit braces if you have an else clause.
@@ -119,46 +130,6 @@
        In such cases, the construct is actually a loop rather than a functional comprehension
        and it is usually more readable to string the generators together between parentheses
        rather than using the syntactically-confusing } { construct. -->
-  <!-- Generally speaking, method invocation in Scala follows Java conventions.
-       In other words, there should not be a space between the invocation target and the dot (.),
-       nor a space between the dot and the method name,
-       nor should there be any space between the method name and the argument-delimiters (parentheses).
-       Each argument should be separated by a single space following the comma (,):
-       Named parameters in a method invocation should be treated
-       as regular parameters (spaced accordingly following the comma)
-       with a space on either side of the equals sign. -->
-  <check customId="disallow.space.before.method.tokens"
-         enabled="true"
-         class="org.scalastyle.scalariform.DisallowSpaceBeforeTokenChecker"
-         level="warning">
-    <parameters>
-      <parameter name="tokens">DOT, LPAREN, RPAREN, COMMA</parameter>
-    </parameters>
-  </check>
-  <check customId="disallow.space.after.method.tokens"
-         enabled="true"
-         class="org.scalastyle.scalariform.DisallowSpaceAfterTokenChecker"
-         level="warning">
-    <parameters>
-      <parameter name="tokens">DOT, LPAREN, RPAREN</parameter>
-    </parameters>
-  </check>
-  <check customId="ensure.space.before.method.tokens"
-         enabled="true"
-         class="org.scalastyle.scalariform.EnsureSingleSpaceBeforeTokenChecker"
-         level="warning">
-    <parameters>
-      <parameter name="tokens">EQUALS</parameter>
-    </parameters>
-  </check>
-  <check customId="ensure.space.after.method.tokens"
-         enabled="true"
-         class="org.scalastyle.scalariform.EnsureSingleSpaceAfterTokenChecker"
-         level="warning">
-    <parameters>
-      <parameter name="tokens">COMMA, EQUALS</parameter>
-    </parameters>
-  </check>
   <!-- TODO Resist the urge to omit parentheses simply to save two characters -->
   <!-- TODO Avoid punctuation-free syntax for almost all alphabetic-named methods -->
   <!-- TODO Methods that take no arguments should not be invoked using postfix notation -->
@@ -221,24 +192,6 @@
        with the opening brace on the same line as the assignment or invocation,
        while the closing brace is on its own line immediately following the last line of the function.
        Parameters should be on the same line as the opening brace, as should the “arrow” (=>). -->
-  <!-- Curly braces should be separated from the code within them by a one-space gap,
-       to give the visually busy braces “breathing room”. -->
-  <check customId="ensure.space.before.curly.braces"
-         enabled="true"
-         class="org.scalastyle.scalariform.EnsureSingleSpaceBeforeTokenChecker"
-         level="warning">
-    <parameters>
-      <parameter name="tokens">LBRACE, RBRACE</parameter>
-    </parameters>
-  </check>
-  <check customId="ensure.space.after.curly.braces"
-         enabled="true"
-         class="org.scalastyle.scalariform.EnsureSingleSpaceAfterTokenChecker"
-         level="warning">
-    <parameters>
-      <parameter name="tokens">LBRACE, RBRACE</parameter>
-    </parameters>
-  </check>
   <!-- TODO Function values should leverage type inference whenever possible. -->
   <!-- TODO all of http://docs.scala-lang.org/style/scaladoc.html -->
 </scalastyle>
